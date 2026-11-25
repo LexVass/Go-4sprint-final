@@ -32,6 +32,9 @@ func parsePackage(data string) (int, time.Duration, error) {
 	if err2 != nil {
 		return 0, 0, err2
 	}
+	if dur <= 0 {
+		return 0, 0, fmt.Errorf("Продолжительность активности (%v) должна быть больше нуля", dur)
+	}
 	return stepsCount, dur, nil
 }
 

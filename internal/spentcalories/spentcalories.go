@@ -26,9 +26,15 @@ func parseTraining(data string) (int, string, time.Duration, error) {
 	if err1 != nil {
 		return 0, "", 0, err1
 	}
+	if stepsCount <= 0 {
+		return 0, "", 0, fmt.Errorf("Количество шагов (%d) должно быть больше нуля", stepsCount)
+	}
 	dur, err2 := time.ParseDuration(parts[2])
 	if err2 != nil {
 		return 0, "", 0, err2
+	}
+	if dur <= 0 {
+		return 0, "", 0, fmt.Errorf("Продолжительность активности (%v) должна быть больше нуля", dur)
 	}
 	return stepsCount, parts[1], dur, nil
 }
@@ -61,9 +67,9 @@ func TrainingInfo(data string, weight, height float64) (string, error) {
 		}
 		return fmt.Sprintf(
 			"Тип треннировки: %s\n"+
-				"Длительность: %.2f\n"+
-				"Дистанция: %.2f\n"+
-				"Скорость: %.2f\n"+
+				"Длительность: %.2f\n ч."+
+				"Дистанция: %.2f\n км."+
+				"Скорость: %.2f\n км/ч"+
 				"Сожгли калорий: %.2f\n",
 			typeTraining,
 			duration.Hours(),
@@ -78,9 +84,9 @@ func TrainingInfo(data string, weight, height float64) (string, error) {
 		}
 		return fmt.Sprintf(
 			"Тип треннировки: %s\n"+
-				"Длительность: %.2f\n"+
-				"Дистанция: %.2f\n"+
-				"Скорость: %.2f\n"+
+				"Длительность: %.2f ч.\n"+
+				"Дистанция: %.2f км.\n"+
+				"Скорость: %.2f км/ч\n"+
 				"Сожгли калорий: %.2f\n",
 			typeTraining,
 			duration.Hours(),
