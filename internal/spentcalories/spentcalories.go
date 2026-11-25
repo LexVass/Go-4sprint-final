@@ -95,8 +95,8 @@ func TrainingInfo(data string, weight, height float64) (string, error) {
 }
 
 func RunningSpentCalories(steps int, weight, height float64, duration time.Duration) (float64, error) {
-	if steps < 0 {
-		return 0, fmt.Errorf("Количество шагов (%d) не может быть меньше нуля", steps)
+	if steps <= 0 {
+		return 0, fmt.Errorf("Количество шагов (%d) должно быть больше нуля", steps)
 	}
 	if weight <= 0 {
 		return 0, fmt.Errorf("Масса (%.2f) должна быть больше нуля", weight)
@@ -112,8 +112,8 @@ func RunningSpentCalories(steps int, weight, height float64, duration time.Durat
 }
 
 func WalkingSpentCalories(steps int, weight, height float64, duration time.Duration) (float64, error) {
-	if steps < 0 {
-		return 0, fmt.Errorf("Количество шагов (%d) не может быть меньше нуля", steps)
+	if steps <= 0 {
+		return 0, fmt.Errorf("Количество шагов (%d) должно быть больше нуля", steps)
 	}
 	if weight <= 0 {
 		return 0, fmt.Errorf("Масса (%.2f) должна быть больше нуля", weight)
